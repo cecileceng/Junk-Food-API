@@ -1,0 +1,18 @@
+body {
+	background: url('../junk-food-bg.jpg');
+	background-repeat: repeat;
+}
+
+button {
+	margin: 10px;
+}
+
+.container {
+	max-width: 900px;
+	background-color: white;
+	margin: 35px;
+}
+
+#junk-food-form {
+	margin: 5px;
+}
