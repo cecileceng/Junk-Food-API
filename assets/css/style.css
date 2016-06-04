@@ -16,3 +16,9 @@ button {
 #junk-food-form {
 	margin: 5px;
 }
+
+#giphy-cred img {
+	width: 200px;
+	height: auto;
+	margin-left: 35%;
+}

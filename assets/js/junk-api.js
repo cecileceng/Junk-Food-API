@@ -5,20 +5,25 @@ var publicBetaKey = 'dc6zaTOxFJmzC';
 //FUNCTIONS
 function displayJunkFoodInfo(){ // displayJunkFoodInfo function now re-renders the HTML to display the appropriate content. 
 
-	var junk = $(this).attr('data-name');
-	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + junk + "&limit=10&rating=g&api_key=dc6zaTOxFJmzC";
+	var junk = $(this).attr('data');
+
+	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + junk + "&api_key=dc6zaTOxFJmzC&limit=10";
 
 	$.ajax({url: queryURL, method: 'GET'}).done(function(response) { // Creates AJAX call for the specific junk food gif being served up
 
-	var junkFoodDiv = $('<div class="junk-food btn btn-warning">'); // Creates a generic div to hold the junk food
+	var searchResults = response.data;
+	console.log(this)
 
-	var rating = response.Rated; // Retrieves the Rating Data
+	var junkFoodDiv = $('<div class="junk-food">'); // Creates a generic div to hold the junk food
 
-	var pOne = $('<p>').text( "Rating: " + rating); // Creates an element to have the rating displayed
+	var getRating = searchResults.data.rating; // Retrieves the Rating Data
+	console.log(rating)
+
+	var displayRating = $('<p>').text( "Rating: " + getRating); // Creates an element to have the rating displayed
 	
-	junkFoodDiv.append(pOne); // Displays the rating
+	junkFoodDiv.append(displayRating); // Displays the rating
 
-	var image = $('<img>').attr("src", response.fixedwidth); // Creates an element to hold the image 
+	var image = $('<img>').attr("src", searchResults.data.images.fixed_height_still.url); // Creates an element to hold the image 
 
 	junkFoodDiv.append(image); // Appends the image
 
@@ -50,7 +55,7 @@ function displayJunkFoodInfo(){ // displayJunkFoodInfo function now re-renders t
 
 		    var a = $('<button>') // This code $('<button>') is all jQuery needs to create the beginning and end tag. (<button></button>)
 		    a.addClass('junk-food btn btn-warning'); // Added a class 
-		    a.attr('data-name', junkFoods[i]); // Added a data-attribute
+		    a.attr('data', junkFoods[i]); // Added a data-attribute
 		    a.text(junkFoods[i]); // Provided the initial button text
 		    $('#junkFoodButtons').append(a); // Added the button to the HTML
 		}
